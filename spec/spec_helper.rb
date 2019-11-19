@@ -1,6 +1,7 @@
 ENV["SINATRA_ENV"] = "test"
 
 require_relative '../config/environment'
+# require 'database_cleaner/active_record'
 require 'rack/test'
 require 'capybara/rspec'
 require 'capybara/dsl'
@@ -10,7 +11,8 @@ if defined?(ActiveRecord::Migrator) && ActiveRecord::Migrator.needs_migration?
 end
 
 RSpec.configure do |config|
-  config.run_all_when_everything_filtered = true
+  # config.run_all_when_everything_filtered = true
+  config.use_transactional_fixtures = false
   config.filter_run :focus
   config.include Rack::Test::Methods
   config.include Capybara::DSL
